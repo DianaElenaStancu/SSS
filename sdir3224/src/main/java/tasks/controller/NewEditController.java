@@ -45,6 +45,7 @@ public class NewEditController {
 
 
     private boolean incorrectInputMade;
+    private boolean editMode;
     @FXML
     private TextField fieldTitle;
     @FXML
@@ -96,12 +97,14 @@ public class NewEditController {
 
     }
     private void initNewWindow(String title){
+        editMode = false;
         currentStage.setTitle(title);
         datePickerStart.setValue(LocalDate.now());
         txtFieldTimeStart.setText(DEFAULT_START_TIME);
     }
 
     private void initEditWindow(String title){
+        editMode = true;
         currentStage.setTitle(title);
         fieldTitle.setText(currentTask.getTitle());
         datePickerStart.setValue(dateService.getLocalDateValueFromDate(currentTask.getStartTime()));
@@ -144,16 +147,21 @@ public class NewEditController {
         Task collectedFieldsTask = collectFieldsData();
         if (incorrectInputMade) return;
 
-        if (currentTask == null){//no task was chosen -> add button was pressed
+        if (!editMode){//no task was chosen -> add button was pressed
             tasksList.add(collectedFieldsTask);
         }
         else {
-            for (int i = 0; i < tasksList.size(); i++){
-                if (currentTask.equals(tasksList.get(i))){
-                    tasksList.set(i,collectedFieldsTask);
+            if (currentTask != null && collectedFieldsTask != null) {
+                for (int i = 0; i < tasksList.size(); i++) {
+                    if (currentTask.equals(tasksList.get(i))) {
+                        tasksList.set(i, collectedFieldsTask);
+                    }
                 }
+                currentTask = null;
             }
-            currentTask = null;
+            else {
+                log.error("currentTask is null");
+            }
         }
         TaskIO.rewriteFile(tasksList);
         Controller.editNewStage.close();
@@ -189,6 +197,7 @@ public class NewEditController {
     private Task makeTask(){
         Task result;
         String newTitle = fieldTitle.getText();
+        if (newTitle.isEmpty()) throw new IllegalArgumentException("Title is empty");
         Date startDateWithNoTime = dateService.getDateValueFromLocalDate(datePickerStart.getValue());//ONLY date!!without time
         Date newStartDate = dateService.getDateMergedWithTime(txtFieldTimeStart.getText(), startDateWithNoTime);
         if (checkBoxRepeated.isSelected()){
