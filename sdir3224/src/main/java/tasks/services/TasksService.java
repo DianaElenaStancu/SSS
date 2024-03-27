@@ -57,4 +57,8 @@ public class TasksService {
         tasks.remove(task);
         tasks.add(task);
     }
+
+    public ArrayTaskList getTasks() {
+        return tasks;
+    }
 }
