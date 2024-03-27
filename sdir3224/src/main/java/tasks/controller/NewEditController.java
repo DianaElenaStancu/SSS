@@ -148,22 +148,21 @@ public class NewEditController {
         if (incorrectInputMade) return;
 
         if (!editMode){//no task was chosen -> add button was pressed
-            tasksList.add(collectedFieldsTask);
+            service.saveTask(collectedFieldsTask);
         }
         else {
             if (currentTask != null && collectedFieldsTask != null) {
-                for (int i = 0; i < tasksList.size(); i++) {
-                    if (currentTask.equals(tasksList.get(i))) {
-                        tasksList.set(i, collectedFieldsTask);
-                    }
-                }
+                service.saveTask(currentTask);
+
                 currentTask = null;
             }
             else {
                 log.error("currentTask is null");
             }
         }
-        TaskIO.rewriteFile(tasksList);
+
+        TaskIO.rewriteFile(service.getObservableList());
+
         Controller.editNewStage.close();
     }
     @FXML

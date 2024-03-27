@@ -5,3 +5,14 @@
 2024-02-29 12:38:50 INFO  Main:35 - saved data reading
 2024-02-29 12:38:50 INFO  Main:40 - application start
 2024-02-29 12:38:51 INFO  Controller:74 - Main controller initializing
+2024-03-27 16:19:34 INFO  Main:35 - saved data reading
+2024-03-27 16:19:34 INFO  Main:40 - application start
+2024-03-27 16:19:35 INFO  Controller:74 - Main controller initializing
+2024-03-27 16:19:42 INFO  NewEditController:90 - new/edit window initializing
+2024-03-27 16:37:37 INFO  Main:35 - saved data reading
+2024-03-27 16:37:37 INFO  Main:40 - application start
+2024-03-27 16:37:38 INFO  Controller:74 - Main controller initializing
+2024-03-27 16:37:42 INFO  NewEditController:90 - new/edit window initializing
+2024-03-27 16:37:48 ERROR TaskIO:79 - IO exception reading or writing file
+2024-03-27 16:37:53 INFO  NewEditController:90 - new/edit window initializing
+2024-03-27 16:37:59 ERROR TaskIO:79 - IO exception reading or writing file
