@@ -16,3 +16,12 @@
 2024-03-27 16:37:48 ERROR TaskIO:79 - IO exception reading or writing file
 2024-03-27 16:37:53 INFO  NewEditController:90 - new/edit window initializing
 2024-03-27 16:37:59 ERROR TaskIO:79 - IO exception reading or writing file
+2024-03-27 17:03:30 ERROR Task:41 - interval < than 1
+2024-03-27 17:11:58 ERROR Task:37 - time below bound
+2024-03-27 17:13:41 ERROR Task:37 - time below bound
+2024-03-27 17:14:45 ERROR Task:37 - time below bound
+2024-03-27 17:15:22 ERROR Task:37 - time below bound
+2024-03-27 17:15:42 ERROR Task:37 - time below bound
+2024-03-27 17:15:47 ERROR Task:37 - time below bound
+2024-03-27 17:15:58 ERROR Task:37 - time below bound
+2024-03-27 17:17:59 ERROR Task:37 - time below bound
