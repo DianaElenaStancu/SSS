@@ -13,6 +13,10 @@ public class TasksService {
 
     private ArrayTaskList tasks;
 
+    public void clear() {
+        tasks.clear();
+    }
+
     public TasksService(ArrayTaskList tasks){
         this.tasks = tasks;
     }

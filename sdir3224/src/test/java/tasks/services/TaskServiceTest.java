@@ -1,109 +1,186 @@
 package tasks.services;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.*;
 import tasks.model.ArrayTaskList;
 import tasks.model.Task;
 
 import java.util.Date;
 
+@Timeout(2000)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TaskServiceTest {
     private static TasksService service;
 
     @BeforeAll
     static void generalSetUp() {
-    }
-
-    @AfterAll
-    static void bigCleaning() {
-
-    }
-
-    @BeforeEach
-    void testSetup() {
         ArrayTaskList tasks = new ArrayTaskList();
         service = new TasksService(tasks);
     }
 
-    @AfterEach
-    void testCleaning() {
+    @AfterAll
+    static void bigCleaning() {
         service = null;
     }
 
-    @Test
-    public void sampleTest() {
-        Assertions.assertEquals(2, 3 - 1);
-    }
-
-    @Test
-    @Tag("bva")
-    public void saveTaskWithValidTitle() {
-        Task task = new Task("Title", new Date(), new Date(), 1);
-
-        try {
+    @Nested
+    @Tag("ECP")
+    @DisplayName("ECP Tests")
+    class EcpTesting {
+        @BeforeEach
+        void testSetup() {
+            Task task = new Task("Test data", new Date(), new Date(), 1);
             service.saveTask(task);
-        } catch(Exception e) {
-            throw new RuntimeException(e);
         }
 
-        assert(service.getTasks().size() == 1);
-        assert(service.getTasks().getTask(0) == task);
-    }
-
-    @Test
-    @Tag("bva")
-    public void saveTaskWithValidDate() {
-        Task task = new Task("Title", new Date(), new Date(), 1);
-
-        try {
-            service.saveTask(task);
-        } catch(Exception e) {
-            throw new RuntimeException(e);
+        @AfterEach
+        void testCleaning() {
+            service.clear();
         }
 
-        System.out.println(service.getTasks().toString());
-        assert(service.getTasks().size() == 1);
-        assert(service.getTasks().getTask(0) == task);
-    }
 
-    @Test
-    @Tag("bva")
-    public void saveTaskWithInvalidTitleLowerBound() {
-        Task task = new Task("", new Date(), new Date(), 1);
+        @Test
+        @DisplayName("Save task with a valid description")
+        public void saveTaskWithValidTitle() {
+            Task task = new Task("Sample", new Date(), new Date(), 1);
 
-        try {
-            service.saveTask(task);
-        } catch(Exception e) {
-            throw new RuntimeException(e);
+            Assertions.assertDoesNotThrow(() -> service.saveTask(task));
+            Assertions.assertEquals(2, service.getTasks().size());
         }
 
-        assert(service.getTasks().size() == 0);
-    }
-
-    @Test
-    @Tag("bva")
-    public void saveTaskWithInvalidTitleUpperBound() {
-        Task task = new Task("wLhIUEnLeKNcsrv7oFQqpr2gznG41jQdaWE5MYp1x2Z88PEuaCegF3dSr3ScuuwzzFfT5Fj6Zah8etTUXrRiUau9qfLJZxqwqMoaDv6TT6mG8V2V20BrOlYlV1w2A50sREW5YFRA5N4cY1UMF7NMZN5KTeSCWskqlz5gKbdFbQaMj6P2ZZ3xqHlBH4eDfbrpKD6RJB3i4rASxpJ3RSNNMX0rG4uYJrnuCWlkFiEtjzd3yhVrkIlIwIpw4U9oH6Yt", new Date(), new Date(), 1);
-
-        try {
-            service.saveTask(task);
-        } catch(Exception e) {
-            throw new RuntimeException(e);
+        @Test
+        @DisplayName("Save task with a invalid description")
+        public void saveTaskWithInvalid() {
+            Assertions.assertThrows(IllegalArgumentException.class, () -> {
+                Task task = new Task("bzhwbkwuzbzgntpfcdkrcnniztzzvjhitfwxrtphqjrgemnxuauyjuanvuieeeadgacfvxjamgypqxtkvaeidiyphmpabbrhhqaehhjmphecaemfmnvnqyryuxtpzzuifpnjmqwepbprcvuyhzfywrctikgyrhtuuawxdzkxjbcbqczcbeyvegkffmrafpxzruxfxjpmxrdftpuxihxrnkthwfjytyrgugxufqhmkezttkdkznzubdiygtbwvdxrghkzeetayzjduayfmqrgihmknknvhvvdmixmhzftjctw", new Date(), new Date(), 1);
+                service.saveTask(task);
+            });
+            Assertions.assertEquals(1, service.getTasks().size());
         }
 
-        assert(service.getTasks().size() == 0);
+        @Test
+        @DisplayName("Save task with a valid date")
+        public void saveTaskWithValidDate() {
+            Task task = new Task("Title", new Date(2024, 04, 21), new Date(), 1);
+
+            Assertions.assertDoesNotThrow(() -> {
+                service.saveTask(task);
+            });
+
+            Assertions.assertEquals(2, service.getTasks().size());
+            Assertions.assertEquals(service.getTasks().getTask(1), task);
+        }
+
+        @Test
+        @DisplayName("Save task with invalid date")
+        public void saveTaskWithInvalidDate() {
+            Assertions.assertThrows(IllegalArgumentException.class, () -> new Task("Title", new Date(2025, 04, 26), new Date(), 1));
+            Assertions.assertEquals(1, service.getTasks().size());
+        }
     }
 
-    /*nu se poate testa cazul date before 1970 pentru ca nu se poate crea un task cu o asemenea data*/
-    @Test
-    @Tag("bva")
-    public void saveTaskWithInvalidDate() {
-        try {
-            Task task = new Task("Title", new Date(69, 11, 31), new Date(69, 11, 31), 1);
-        } catch(IllegalArgumentException illegalArgumentException) {
-            assert (illegalArgumentException.getMessage().equals("Time cannot be negative"));
-        } catch(Exception e) {
-            throw new RuntimeException(e);
+
+    @Nested
+    @Tag("BVA")
+    @DisplayName("BVA Tests")
+    class BvaTesting {
+        @BeforeEach
+        void testSetup() {
+            Task task = new Task("Test data", new Date(), new Date(), 1);
+            service.saveTask(task);
+        }
+
+        @AfterEach
+        void testCleaning() {
+            service.clear();
+        }
+
+        @Test
+        @DisplayName("Save task with a valid description (lower bound)")
+        public void saveTaskWithValidTitle() {
+            Task task = new Task("T", new Date(), new Date(), 1);
+
+            Assertions.assertDoesNotThrow(() -> {
+                service.saveTask(task);
+            });
+
+            Assertions.assertEquals(2, service.getTasks().size());
+            Assertions.assertEquals(service.getTasks().getTask(1), task);
+        }
+
+        @Test
+        @DisplayName("Save task with a invalid description (empty)")
+        public void saveTaskWithInvalidTitleLowerBound() {
+            Assertions.assertThrows(Exception.class, () -> {
+                Task task = new Task("", new Date(), new Date(), 1);
+                service.saveTask(task);
+            });
+            Assertions.assertEquals(1, service.getTasks().size());
+        }
+
+        @Test
+        @DisplayName("Save task with a invalid description (too long)")
+        public void saveTaskWithInvalidTitleUpperBound() {
+            Assertions.assertThrows(Exception.class, () -> {
+                Task task = new Task("wLhIUEnLeKNcsrv7oFQqpr2gznG41jQdaWE5MYp1x2Z88PEuaCegF3dSr3ScuuwzzFfT5Fj6Zah8etTUXrRiUau9qfLJZxqwqMoaDv6TT6mG8V2V20BrOlYlV1w2A50sREW5YFRA5N4cY1UMF7NMZN5KTeSCWskqlz5gKbdFbQaMj6P2ZZ3xqHlBH4eDfbrpKD6RJB3i4rASxpJ3RSNNMX0rG4uYJrnuCWlkFiEtjzd3yhVrkIlIwIpw4U9oH6Yt", new Date(), new Date(), 1);
+                service.saveTask(task);
+            });
+            Assertions.assertEquals(1, service.getTasks().size());
+        }
+
+        @Test
+        @DisplayName("Save task with a valid description (upper bound)")
+        public void saveTaskWithValidTitleUpperBound() {
+            Task task = new Task("wLhIUEnLeKNcsrv7oFQqpr2gznG41jQdaWE5MYp1x2Z88PEuaCegF3dSr3ScuuwzzFfT5Fj6Zah8etTUXrRiUau9qfLJZxqwqMoaDv6TT6mG8V2V20BrOlYlV1w2A50sREW5YFRA5N4cY1UMF7NMZN5KTeSCWskqlz5gKbdFbQaMj6P2ZZ3xqHlBH4eDfbrpKD6RJB3i4rASxpJ3RSNNMX0rG4uYJrnuCWlkFiEtjzd3yhVrkIlIwIpw4U9oH6Y", new Date(), new Date(), 1);
+
+            Assertions.assertDoesNotThrow(() -> service.saveTask(task));
+            Assertions.assertEquals(2, service.getTasks().size());
+        }
+
+        @Test
+        @DisplayName("Save task with a valid date (lower bound)")
+        public void saveTaskWithValidDateLowerBound() {
+            Task task = new Task("Title", new Date(), new Date(), 1);
+
+            Assertions.assertDoesNotThrow(() -> {
+                service.saveTask(task);
+            });
+
+            Assertions.assertEquals(2, service.getTasks().size());
+            Assertions.assertEquals(service.getTasks().getTask(1), task);
+        }
+
+        @Test
+        @DisplayName("Save task with a valid date (upper bound)")
+        public void saveTaskWithValidDateUpperBound() {
+            Task task = new Task("Title", new Date(), new Date(), 1);
+
+            Assertions.assertDoesNotThrow(() -> {
+                service.saveTask(task);
+            });
+
+            Assertions.assertEquals(2, service.getTasks().size());
+            Assertions.assertEquals(service.getTasks().getTask(1), task);
+        }
+
+        @Test
+        @DisplayName("Save task with invalid date (before 1970)")
+        public void saveTaskWithInvalidDateLowerBound() {
+            Assertions.assertThrows(IllegalArgumentException.class, () -> new Task("Title", new Date(-1), new Date(69, 12, 31), 1));
+            Assertions.assertEquals(1, service.getTasks().size());
+        }
+
+        @Test
+        @DisplayName("Save task with invalid date (after 2024)")
+        public void saveTaskWithInvalidDateUpperBound() {
+            Assertions.assertThrows(IllegalArgumentException.class, () -> new Task("Title", new Date(2025, 1, 1), new Date(), 1));
+            Assertions.assertEquals(1, service.getTasks().size());
+        }
+
+        @Test
+        @Disabled("For testing purposes")
+        @DisplayName("Disabled test")
+        public void testRepeatInvalidValue() {
+
         }
     }
 }

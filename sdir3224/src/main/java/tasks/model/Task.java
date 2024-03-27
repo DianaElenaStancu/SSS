@@ -33,9 +33,13 @@ public class Task implements Serializable, Cloneable {
         this.end = time;
     }
     public Task(String title, Date start, Date end, int interval){
-        if (start.getTime() < 0 || end.getTime() < 0) {
+        if ((start.getTime() < 0 || start.getTime() >= new Date(2025, 01, 01).getTime()) || end.getTime() < 0) {
             log.error("time below bound");
             throw new IllegalArgumentException("Time cannot be negative");
+        }
+        if (title.isEmpty() || title.length() > 255) {
+            log.error("title not good");
+            throw new IllegalArgumentException("Title is out of bounds");
         }
         if (interval < 1) {
             log.error("interval < than 1");
@@ -181,4 +185,3 @@ public class Task implements Serializable, Cloneable {
         return task;
     }
 }
-
