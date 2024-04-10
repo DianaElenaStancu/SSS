@@ -45,7 +45,6 @@ public class NewEditController {
 
 
     private boolean incorrectInputMade;
-    private boolean editMode;
     @FXML
     private TextField fieldTitle;
     @FXML
@@ -77,34 +76,26 @@ public class NewEditController {
     }
     public void setCurrentTask(Task task){
         this.currentTask=task;
-        switch (clickedButton.getId()){
-            case  "btnNew" : initNewWindow("New Task");
-                break;
-            case "btnEdit" : initEditWindow("Edit Task");
-                break;
+
+        if(clickedButton.getId().equals("btnNew")){
+            initNewWindow("New Task");
+        }
+        else if(clickedButton.getId().equals("btnEdit")){
+            initNewWindow("Edit Task");
         }
     }
 
     @FXML
     public void initialize(){
         log.info("new/edit window initializing");
-//        switch (clickedButton.getId()){
-//            case  "btnNew" : initNewWindow("New Task");
-//                break;
-//            case "btnEdit" : initEditWindow("Edit Task");
-//                break;
-//        }
-
     }
     private void initNewWindow(String title){
-        editMode = false;
         currentStage.setTitle(title);
         datePickerStart.setValue(LocalDate.now());
         txtFieldTimeStart.setText(DEFAULT_START_TIME);
     }
 
     private void initEditWindow(String title){
-        editMode = true;
         currentStage.setTitle(title);
         fieldTitle.setText(currentTask.getTitle());
         datePickerStart.setValue(dateService.getLocalDateValueFromDate(currentTask.getStartTime()));
@@ -147,22 +138,18 @@ public class NewEditController {
         Task collectedFieldsTask = collectFieldsData();
         if (incorrectInputMade) return;
 
-        if (!editMode){//no task was chosen -> add button was pressed
-            service.saveTask(collectedFieldsTask);
+        if (currentTask == null){//no task was chosen -> add button was pressed
+            tasksList.add(collectedFieldsTask);
         }
         else {
-            if (currentTask != null && collectedFieldsTask != null) {
-                service.saveTask(currentTask);
-
-                currentTask = null;
+            for (int i = 0; i < tasksList.size(); i++){
+                if (currentTask.equals(tasksList.get(i))){
+                    tasksList.set(i,collectedFieldsTask);
+                }
             }
-            else {
-                log.error("currentTask is null");
-            }
+            currentTask = null;
         }
-
-        TaskIO.rewriteFile(service.getObservableList());
-
+        TaskIO.rewriteFile(tasksList);
         Controller.editNewStage.close();
     }
     @FXML
@@ -196,7 +183,6 @@ public class NewEditController {
     private Task makeTask(){
         Task result;
         String newTitle = fieldTitle.getText();
-        if (newTitle.isEmpty()) throw new IllegalArgumentException("Title is empty");
         Date startDateWithNoTime = dateService.getDateValueFromLocalDate(datePickerStart.getValue());//ONLY date!!without time
         Date newStartDate = dateService.getDateMergedWithTime(txtFieldTimeStart.getText(), startDateWithNoTime);
         if (checkBoxRepeated.isSelected()){

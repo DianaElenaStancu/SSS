@@ -12,13 +12,6 @@ public class ArrayTaskList extends TaskList{
     private int numberOfTasks;
     private int currentCapacity;
     private static final Logger log = Logger.getLogger(ArrayTaskList.class.getName());
-
-    public void clear() {
-        currentCapacity = 10;
-        numberOfTasks = 0;
-        this.tasks = new Task[currentCapacity];
-    }
-
     private class ArrayTaskListIterator implements Iterator<Task> {
         private int cursor;
         private int lastCalled = -1;
@@ -49,7 +42,6 @@ public class ArrayTaskList extends TaskList{
     }
     public ArrayTaskList(){
         currentCapacity = 10;
-        numberOfTasks = 0;
         this.tasks = new Task[currentCapacity];
     }
 
@@ -144,13 +136,9 @@ public class ArrayTaskList extends TaskList{
                 ", currentCapacity=" + currentCapacity +
                 '}';
     }
-    @Override
-    protected ArrayTaskList clone() throws CloneNotSupportedException {
-        ArrayTaskList tasks = new ArrayTaskList();
-        for (int i = 0; i < this.tasks.length; i++){
-            tasks.add(this.getTask(i));
-        }
-        return tasks;
-
+    public ArrayTaskList(ArrayTaskList other) {
+        this.currentCapacity = other.currentCapacity;
+        this.numberOfTasks = other.numberOfTasks;
+        this.tasks = Arrays.copyOf(other.tasks, other.tasks.length);
     }
 }

@@ -27,13 +27,15 @@ public class Task implements Serializable, Cloneable {
             log.error("time below bound");
             throw new IllegalArgumentException("Time cannot be negative");
         }
+        this.active = true;
+        this.interval = 0;
         this.title = title;
         this.time = time;
         this.start = time;
         this.end = time;
     }
     public Task(String title, Date start, Date end, int interval){
-        if ((start.getTime() < 0 || start.getTime() >= new Date(2025, 01, 01).getTime()) || end.getTime() < 0) {
+        if (start.getTime() < 0 || end.getTime() < 0) {
             log.error("time below bound");
             throw new IllegalArgumentException("Time cannot be negative");
         }
@@ -185,3 +187,4 @@ public class Task implements Serializable, Cloneable {
         return task;
     }
 }
+

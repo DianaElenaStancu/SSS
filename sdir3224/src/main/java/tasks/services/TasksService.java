@@ -13,10 +13,6 @@ public class TasksService {
 
     private ArrayTaskList tasks;
 
-    public void clear() {
-        tasks.clear();
-    }
-
     public TasksService(ArrayTaskList tasks){
         this.tasks = tasks;
     }
@@ -62,7 +58,11 @@ public class TasksService {
         tasks.add(task);
     }
 
-    public ArrayTaskList getTasks() {
+    public ArrayTaskList getTasks(){
         return tasks;
+    }
+
+    public void clear(){
+        tasks = new ArrayTaskList();
     }
 }
