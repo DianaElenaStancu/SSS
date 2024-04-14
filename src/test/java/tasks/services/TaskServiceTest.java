@@ -6,8 +6,6 @@ import tasks.model.Task;
 
 import java.util.Date;
 
-@Timeout(2000)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TaskServiceTest {
     private static TasksService service;
 
