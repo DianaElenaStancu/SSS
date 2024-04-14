@@ -25,7 +25,7 @@ class TasksOperationsTest {
     }
 
     @Test
-    void F02_incoming_tasksIsEmpty_returnOne() {
+    public void F02_incoming_tasksIsEmpty_returnOne() {
         // Arrange
         ObservableList<Task> tasks = FXCollections.observableArrayList();
         TasksOperations top = new TasksOperations(tasks);
@@ -39,7 +39,7 @@ class TasksOperationsTest {
     }
 
     @Test
-    void F02_incoming_tasksIsNotEmptyAndHasDatesInInterval_returnExpectedTasks() {
+    public void F02_incoming_tasksIsNotEmptyAndHasDatesInInterval_returnExpectedTasks() {
         // Arrange
         ObservableList<Task> tasks = FXCollections.observableArrayList();
 
@@ -60,7 +60,7 @@ class TasksOperationsTest {
     }
 
     @Test
-    void F02_incoming_tasksIsNotEmptyAndDoesntHaveTasksInInterval_returnOne() {
+    public void F02_incoming_tasksIsNotEmptyAndDoesntHaveTasksInInterval_returnOne() {
         // Arrange
         ObservableList<Task> tasks = FXCollections.observableArrayList();
 
@@ -82,7 +82,7 @@ class TasksOperationsTest {
     }
 
     @Test
-    void F02_incoming_IntervalIsNull_returnOne() {
+    public void F02_incoming_IntervalIsNull_returnOne() {
         // Arrange
         ObservableList<Task> tasks = FXCollections.observableArrayList();
 
@@ -105,7 +105,7 @@ class TasksOperationsTest {
 
 
     @Test
-    void F02_incoming_StartlIsNull_returnOne() {
+    public void F02_incoming_StartlIsNull_returnOne() {
         // Arrange
         ObservableList<Task> tasks = FXCollections.observableArrayList();
 
@@ -127,7 +127,7 @@ class TasksOperationsTest {
     }
 
     @Test
-    void F02_incoming_EndIsNull_returnOne() {
+    public void F02_incoming_EndIsNull_returnOne() {
         // Arrange
         ObservableList<Task> tasks = FXCollections.observableArrayList();
 
@@ -149,7 +149,7 @@ class TasksOperationsTest {
     }
 
     @Test
-    void F02_incoming_tasksHasOneElementAndHasDatesInInterval_returnExpectedTasks() {
+    public void F02_incoming_tasksHasOneElementAndHasDatesInInterval_returnExpectedTasks() {
         // Arrange
         ObservableList<Task> tasks = FXCollections.observableArrayList();
 
@@ -165,7 +165,7 @@ class TasksOperationsTest {
     }
 
     @Test
-    void F02_incoming_tasksHasTwoElementsAndHasDatesInInterval_returnExpectedTasks() {
+    public void F02_incoming_tasksHasTwoElementsAndHasDatesInInterval_returnExpectedTasks() {
         // Arrange
         ObservableList<Task> tasks = FXCollections.observableArrayList();
 
