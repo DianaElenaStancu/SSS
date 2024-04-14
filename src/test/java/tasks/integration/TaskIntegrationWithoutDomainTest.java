@@ -15,7 +15,6 @@ import tasks.services.TasksService;
 import java.util.Date;
 
 public class TaskIntegrationWithoutDomainTest {
-    @Mock
     Task task;
 
     ArrayTaskList taskList;
@@ -24,7 +23,7 @@ public class TaskIntegrationWithoutDomainTest {
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        task = Mockito.mock(Task.class);
         taskList = new ArrayTaskList();
         tasksService = new TasksService(taskList);
 
