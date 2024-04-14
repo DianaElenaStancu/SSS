@@ -14,7 +14,6 @@ import tasks.services.TasksService;
 
 import java.util.Date;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TaskIntegrationWithoutDomainTest {
     @Mock
     Task task;
