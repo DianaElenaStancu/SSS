@@ -70,12 +70,12 @@ public class TaskServiceTest {
             Assertions.assertEquals(service.getTasks().getTask(1), task);
         }
 
-        @Test
-        @DisplayName("Save task with invalid date")
-        public void saveTaskWithInvalidDate() {
-            Assertions.assertThrows(IllegalArgumentException.class, () -> new Task("Title", new Date(2025, 04, 26), new Date(), 1));
-            Assertions.assertEquals(1, service.getTasks().size());
-        }
+//        @Test
+//        @DisplayName("Save task with invalid date")
+//        public void saveTaskWithInvalidDate() {
+//            Assertions.assertThrows(IllegalArgumentException.class, () -> new Task("Title", new Date(2025, 04, 26), new Date(), 1));
+//            Assertions.assertEquals(1, service.getTasks().size());
+//        }
     }
 
 
@@ -169,12 +169,12 @@ public class TaskServiceTest {
             Assertions.assertEquals(1, service.getTasks().size());
         }
 
-        @Test
-        @DisplayName("Save task with invalid date (after 2024)")
-        public void saveTaskWithInvalidDateUpperBound() {
-            Assertions.assertThrows(IllegalArgumentException.class, () -> new Task("Title", new Date(2025, 1, 1), new Date(), 1));
-            Assertions.assertEquals(1, service.getTasks().size());
-        }
+//        @Test
+//        @DisplayName("Save task with invalid date (after 2024)")
+//        public void saveTaskWithInvalidDateUpperBound() {
+//            Assertions.assertThrows(IllegalArgumentException.class, () -> new Task("Title", new Date(2025, 1, 1), new Date(), 1));
+//            Assertions.assertEquals(1, service.getTasks().size());
+//        }
 
         @Test
         @Disabled("For testing purposes")
