@@ -10,7 +10,7 @@ import java.util.Date;
 
 class TasksOperationsTest {
     @Test
-    public void F02_taskIsEmpty() {
+    public void Test1_taskIsEmpty() {
         // Arrange
         ObservableList<Task> tasks = FXCollections.observableArrayList();
         TasksOperations top = new TasksOperations(tasks);
