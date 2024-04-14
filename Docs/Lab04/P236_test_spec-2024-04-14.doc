@@ -12,7 +12,7 @@
 <p style="text-align: center;"><img alt="TestLink logo" title="configure using $tlCfg->document_generator->company_logo"  width= height= src="https://www.scs.ubbcluj.ro/testlink/gui/themes/default/images/tl-logo-transparent-25.png" /></p></div>
 <div class="doc_title"><p>Test Specification</p></div>
 <div class="doc_title" style="text-align:left;margin: auto;"><p>Test Project: Prj236<br/>Test Suite: Prj236 - sair3220_IntT</p></div>
-<div class="summary"><p id="printedby">Printed by TestLink on 13/04/2024</p></div>
+<div class="summary"><p id="printedby">Printed by TestLink on 14/04/2024</p></div>
 <div class="pagefooter" id="copyright">2012 &copy; TestLink Community</div>
 <h1 class="general" style="page-break-before: always">Table Of Contents</h1><div class="toc"><p style="padding-left: 20px;"><b><a href="#toc_1">1.sair3220_IntT</a></b></p>
 <p style="padding-left: 45px;"><a href="#toc_tc21961">P236-68: IntT-TopDown-Unit</a></p><p style="padding-left: 45px;"><a href="#toc_tc21963">P236-69: IntT-TopDown-First</a></p><p style="padding-left: 45px;"><a href="#toc_tc21965">P236-70: IntT-TopDown-Second</a></p></div><h1 class="doclevel" >Scope</h1>
@@ -25,8 +25,8 @@
 </td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
 <tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
 <tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
-<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >tasks.model.TaskTest;</td></tr>
-<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >tasks.model.TestTask</td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" >tasks.model.TestTask#Test1_TestConstructor</td></tr>
 <tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">sair3220_F01:  Adaugarea unui task [Version : 1]<br /></td></tr>
 <tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
 </table>
@@ -37,8 +37,8 @@
 </td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
 <tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
 <tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
-<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >tasks.integration.TaskIntegrationTest.ServiceWithRepositoryIntegration;</td></tr>
-<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >tasks.integration.TaskIntegrationWithDomainTest</td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" >tasks.integration.TaskIntegrationWithDomainTest#Test1_getObservableList</td></tr>
 <tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">sair3220_F01:  Adaugarea unui task [Version : 1]<br /></td></tr>
 <tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
 </table>
@@ -49,8 +49,8 @@
 </td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
 <tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
 <tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
-<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >tasks.integration.TaskIntegrationTest.ServiceWithRepositoryWithDomainIntegration;</td></tr>
-<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >tasks.integration.TaskIntegrationWithoutDomainTest</td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" >tasks.integration.TaskIntegrationWithoutDomainTest#Test2_getIntervalInHours</td></tr>
 <tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">sair3220_F01:  Adaugarea unui task [Version : 1]<br /></td></tr>
 <tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
 </table>
