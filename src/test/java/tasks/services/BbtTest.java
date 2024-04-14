@@ -1,7 +1,6 @@
 package tasks.services;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tasks.model.ArrayTaskList;
@@ -10,16 +9,12 @@ import tasks.model.Task;
 import java.util.Date;
 
 public class BbtTest {
-    private static TasksService service;
-
-    @BeforeAll
-    static void setUpBeforeClass() {
-        ArrayTaskList taskList = new ArrayTaskList();
-        service = new TasksService(taskList);
-    }
+    private TasksService service;
 
     @BeforeEach
     public void setUp() {
+        ArrayTaskList taskList = new ArrayTaskList();
+        service = new TasksService(taskList);
         service.clear();
         Task task = new Task("Test data", new Date(), new Date(), 1);
         service.saveTask(task);
