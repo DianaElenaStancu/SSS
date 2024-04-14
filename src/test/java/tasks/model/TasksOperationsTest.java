@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class TasksOperationsTest {
 
     @BeforeEach
@@ -25,7 +23,7 @@ class TasksOperationsTest {
     }
 
     @Test
-    public void F02_incoming_tasksIsEmpty_returnOne() {
+    public void F02_taskIsEmpty() {
         // Arrange
         ObservableList<Task> tasks = FXCollections.observableArrayList();
         TasksOperations top = new TasksOperations(tasks);
